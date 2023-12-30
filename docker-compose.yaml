@@ -1,0 +1,47 @@
+version: '3.8'
+name: ${COMPOSE_PROJECT_NAME}
+services:
+    server:
+        container_name: ${COMPOSE_PROJECT_NAME}-server
+        build:
+            dockerfile: ./server/Dockerfile
+        env_file:
+            - ./.env
+        ports:
+            - 8080:8080
+#            - 50000:50000
+        volumes:
+            - ./server/casc.yaml:/var/casc.yaml
+            # Windows
+            - server-data:/var/jenkins_home
+            # Other
+            # - ./server/data:/var/jenkins_home
+#            - /var/run/docker.sock:/var/run/docker.sock
+    dotnet:
+        container_name: ${COMPOSE_PROJECT_NAME}-agent-dotnet
+        restart: unless-stopped
+        build:
+            dockerfile: ./agent-dotnet/Dockerfile
+        entrypoint: bash /home/jenkins/startup.sh
+        depends_on:
+            - server
+        environment:
+            JENKINS_NODE_HELPER_ID: ${JENKINS_NODE_HELPER_ID}
+            JENKINS_NODE_HELPER_PASSWORD: ${JENKINS_NODE_HELPER_PASSWORD}
+            JENKINS_AGENT_NAME: dotnet
+            JENKINS_AGENT_WORKDIR: /home/jenkins/agent
+            JENKINS_WEB_SOCKET: true
+            JENKINS_URL: ${JENKINS_URL}
+        volumes:
+            - ./agent-dotnet/startup.sh:/home/jenkins/startup.sh
+            # Windows
+            - agent-dotnet-data:/home/jenkins/agent
+            # Other
+            # - ./agent-dotnet/data:/home/jenkins/agent
+
+# Windows WSL has an issue sharing files between host and container, adding latency to the file system.
+# Creating Volumes and mounting them to the container is a workaround.
+volumes:
+    server-data:
+    agent-dotnet-data:
+

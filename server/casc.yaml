@@ -1,0 +1,40 @@
+jenkins:
+  numExecutors: 0
+  nodes:
+    - permanent:
+        name: "dotnet"
+        labelString: "agent to build dotnet projects"
+        mode: EXCLUSIVE
+        numExecutors: 2
+        remoteFS: "/home/jenkins/agent"
+        launcher:
+          inbound:
+            workDirSettings:
+              disabled: false
+              internalDir: remoting
+              failIfWorkDirIsMissing: true
+  securityRealm:
+    local:
+      allowsSignup: false
+      users:
+       - id: ${JENKINS_ADMIN_ID}
+         password: ${JENKINS_ADMIN_PASSWORD}
+       - id: ${JENKINS_NODE_HELPER_ID}
+         password: ${JENKINS_NODE_HELPER_PASSWORD}
+  authorizationStrategy:
+    globalMatrix:
+      permissions:
+        - "USER:Overall/Administer:${JENKINS_ADMIN_ID}"
+        - "GROUP:Overall/Read:authenticated"
+        - "USER:Agent/Connect:${JENKINS_NODE_HELPER_ID}"
+  remotingSecurity:
+    enabled: true
+security:
+  queueItemAuthenticator:
+    authenticators:
+    - global:
+        strategy: triggeringUsersAuthorizationStrategy
+unclassified:
+  location:
+    url: ${JENKINS_URL}
+    adminAddress: ${JENKINS_ADMIN_EMAIL}
