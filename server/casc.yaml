@@ -27,6 +27,7 @@ jenkins:
         - "USER:Overall/Administer:${JENKINS_ADMIN_ID}"
         - "GROUP:Overall/Read:authenticated"
         - "USER:Agent/Connect:${JENKINS_NODE_HELPER_ID}"
+        - "USER:Job/Read:${JENKINS_NODE_HELPER_ID}"
   remotingSecurity:
     enabled: true
 security:
