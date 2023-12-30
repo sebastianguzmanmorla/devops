@@ -30,6 +30,8 @@ jenkins:
   remotingSecurity:
     enabled: true
 security:
+  gitHostKeyVerificationConfiguration:
+    sshHostKeyVerificationStrategy: "noHostKeyVerificationStrategy"
   queueItemAuthenticator:
     authenticators:
     - global:
