@@ -12,12 +12,14 @@ RUN jenkins-plugin-cli --plugins \
     configuration-as-code:latest \
     credentials-binding:latest \
     email-ext:latest \
+    generic-webhook-trigger:latest \
     git:latest \
     github-branch-source:latest \
     gradle:latest \
     ldap:latest \
     mailer:latest \
     matrix-auth:latest \
+    multibranch-scan-webhook-trigger:latest \
     pam-auth:latest \
     pipeline-github-lib:latest \
     pipeline-stage-view:latest \

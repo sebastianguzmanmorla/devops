@@ -3,6 +3,7 @@ name: ${COMPOSE_PROJECT_NAME}
 services:
     server:
         container_name: ${COMPOSE_PROJECT_NAME}-server
+        restart: unless-stopped
         build:
             dockerfile: ./server/Dockerfile
         env_file:
