@@ -8,6 +8,7 @@ RUN jenkins-plugin-cli --plugins \
     antisamy-markup-formatter:latest \
     authorize-project:latest \
     build-timeout:latest \
+    config-file-provider:latest \
     cloudbees-folder:latest \
     configuration-as-code:latest \
     credentials-binding:latest \
