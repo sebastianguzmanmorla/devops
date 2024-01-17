@@ -24,6 +24,7 @@ RUN jenkins-plugin-cli --plugins \
     pam-auth:latest \
     pipeline-github-lib:latest \
     pipeline-stage-view:latest \
+    purge-job-history:latest \
     ssh-slaves:latest \
     timestamper:latest \
     workflow-aggregator:latest \
