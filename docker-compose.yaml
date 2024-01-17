@@ -29,7 +29,7 @@ services:
         environment:
             JENKINS_NODE_HELPER_ID: ${JENKINS_NODE_HELPER_ID}
             JENKINS_NODE_HELPER_PASSWORD: ${JENKINS_NODE_HELPER_PASSWORD}
-            JENKINS_AGENT_NAME: dotnet
+            JENKINS_AGENT_NAME: ${JENKINS_AGENT_NAME_DOTNET}
             JENKINS_AGENT_WORKDIR: /home/jenkins/agent
             JENKINS_WEB_SOCKET: true
             JENKINS_URL: ${JENKINS_URL}

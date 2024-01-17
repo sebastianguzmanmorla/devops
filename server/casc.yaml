@@ -2,11 +2,21 @@ jenkins:
   numExecutors: 0
   nodes:
     - permanent:
-        name: "dotnet"
-        labelString: "agent to build dotnet projects"
+        name: ${JENKINS_AGENT_NAME_DOTNET}
         mode: EXCLUSIVE
         numExecutors: 2
         remoteFS: "/home/jenkins/agent"
+        launcher:
+          inbound:
+            workDirSettings:
+              disabled: false
+              internalDir: remoting
+              failIfWorkDirIsMissing: true
+    - permanent:
+        name: ${JENKINS_AGENT_NAME_WINDOWS}
+        mode: EXCLUSIVE
+        numExecutors: 2
+        remoteFS: ""
         launcher:
           inbound:
             workDirSettings:

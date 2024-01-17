@@ -7,11 +7,6 @@ fi
 
 while [ ! -s /home/jenkins/.secret ]
 do
-    # Wait for Jenkins to start
-    sleep 10
-
-    echo "Getting secret from Jenkins..."
-
     # Get Crumb
     crumb=$(curl \
         -u ${JENKINS_NODE_HELPER_ID}:${JENKINS_NODE_HELPER_PASSWORD} \
@@ -39,6 +34,8 @@ do
     else
         echo "Crumb is invalid, retrying..."
     fi
+
+    sleep 10
 done
 
 # Start agent
