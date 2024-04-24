@@ -6,3 +6,15 @@ RUN apt-get update && apt-get -y upgrade \
 
 COPY --from=jnlp /usr/local/bin/jenkins-agent /usr/local/bin/jenkins-agent
 COPY --from=jnlp /usr/share/jenkins/agent.jar /usr/share/jenkins/agent.jar
+
+RUN dotnet workload install wasm-tools
+
+ENV NODE_VERSION=21.7.3
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+ENV NVM_DIR=/root/.nvm
+RUN . "$NVM_DIR/nvm.sh" && nvm install ${NODE_VERSION}
+RUN . "$NVM_DIR/nvm.sh" && nvm use v${NODE_VERSION}
+RUN . "$NVM_DIR/nvm.sh" && nvm alias default v${NODE_VERSION}
+ENV PATH="/root/.nvm/versions/node/v${NODE_VERSION}/bin/:${PATH}"
+RUN node --version
+RUN npm --version
