@@ -1,7 +1,5 @@
 .env
-
-agent-windows/agent.jar
-agent-windows/.secret
-agent-windows/caches
-agent-windows/remoting
-agent-windows/workspace
+.secret
+agent.jar
+remoting/
+workspace/

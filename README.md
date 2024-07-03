@@ -23,6 +23,6 @@ docker compose up -d
 Run Windows agent in PowerShell
 
 ```ps
-cd agent-windows
+cd jenkins-agent-windows
 ./startup.ps1
 ```
