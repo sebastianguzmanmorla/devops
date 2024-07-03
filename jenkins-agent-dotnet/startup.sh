@@ -1,11 +1,13 @@
 #!/bin/bash
 
-# Create /home/jenkins/.secret file if not exist
-if [ ! -f /home/jenkins/.secret ]; then
-    touch /home/jenkins/.secret
+cd /home/jenkins/
+
+# Create .secret file if not exist
+if [ ! -f .secret ]; then
+    touch .secret
 fi
 
-while [ ! -s /home/jenkins/.secret ]
+while [ ! -s .secret ]
 do
     # Get Crumb
     crumb=$(curl \
@@ -20,14 +22,12 @@ do
             -u ${JENKINS_NODE_HELPER_ID}:${JENKINS_NODE_HELPER_PASSWORD} \
             -H "$crumb" \
             -s "${URL}computer/${NAME}/slave-agent.jnlp" |
-            grep -oP '(?<=<jnlp><application-desc><argument>).*?(?=</argument>)' >> /home/jenkins/.secret
+            grep -oP '(?<=<jnlp><application-desc><argument>).*?(?=</argument>)' >> .secret
 
-        secret=$(cat /home/jenkins/.secret)
+        secret=$(cat .secret)
 
         # Check if secret is not empty
         if [[ $secret != "" ]]; then
-            curl -sO "${URL}jnlpJars/agent.jar"
-
             echo "Secret is valid, starting agent..."
             break
         else
@@ -40,5 +40,9 @@ do
     sleep 10
 done
 
+if [ ! -f agent.jar ]; then
+    curl -o agent.jar "${URL}jnlpJars/agent.jar"
+fi
+
 # Start agent
-java -jar agent.jar -url "${URL}" -secret $(cat /home/jenkins/.secret) -name "${NAME}" -webSocket -workDir "${WORKDIR}"
+java -jar agent.jar -url "${URL}" -secret $(cat .secret) -name "${NAME}" -webSocket -workDir "${WORKDIR}"
