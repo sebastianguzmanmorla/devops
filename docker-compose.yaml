@@ -20,7 +20,7 @@ services:
         restart: unless-stopped
         build:
             dockerfile: ./jenkins-agent-dotnet/Dockerfile
-        entrypoint: bash /home/jenkins/startup.sh
+        entrypoint: bash /home/startup.sh
         depends_on:
             - jenkins
         environment:
