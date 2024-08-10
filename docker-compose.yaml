@@ -63,6 +63,13 @@ services:
         volumes:
             - sonarqube_database:/var/lib/postgresql
             - sonarqube_database_data:/var/lib/postgresql/data
+    tunnel:
+        container_name: ${COMPOSE_PROJECT_NAME}-tunnel
+        image: cloudflare/cloudflared
+        restart: unless-stopped
+        command: tunnel run
+        environment:
+            TUNNEL_TOKEN:  ${CLOUDFLARE_TOKEN}
 
 # Windows WSL has an issue sharing files between host and container, adding latency to the file system.
 # Creating Volumes and mounting them to the container is a workaround.
