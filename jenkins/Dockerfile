@@ -31,4 +31,5 @@ RUN jenkins-plugin-cli --plugins \
     ssh-slaves:latest \
     timestamper:latest \
     workflow-aggregator:latest \
+    workflow-api:latest \
     ws-cleanup:latest
