@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/sdk:8.0-bookworm-slim
+FROM mcr.microsoft.com/dotnet/sdk:9.0-bookworm-slim
 
 COPY jenkins-agent-dotnet/startup.sh /home/startup.sh
 
@@ -7,7 +7,7 @@ RUN apt-get update && apt-get -y upgrade \
 
 RUN dotnet workload install wasm-tools
 
-ENV NODE_VERSION=21.7.3
+ENV NODE_VERSION=23.2.0
 RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 ENV NVM_DIR="/root/.nvm"
 RUN . "$NVM_DIR/nvm.sh" && nvm install ${NODE_VERSION}
