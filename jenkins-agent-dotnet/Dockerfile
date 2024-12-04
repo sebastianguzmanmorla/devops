@@ -3,7 +3,7 @@ FROM mcr.microsoft.com/dotnet/sdk:9.0-bookworm-slim
 COPY jenkins-agent-dotnet/startup.sh /home/startup.sh
 
 RUN apt-get update && apt-get -y upgrade \
-    && apt-get -y install openjdk-17-jre git ssh-client sshpass curl python3
+    && apt-get -y install openjdk-17-jre git ssh-client sshpass curl python3 clang zlib1g-dev
 
 RUN dotnet workload install wasm-tools
 

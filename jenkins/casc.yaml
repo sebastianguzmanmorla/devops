@@ -23,6 +23,17 @@ jenkins:
             workDirSettings:
               disabled: false
               internalDir: remoting
+    - permanent:
+        name: ${JENKINS_AGENT_NAME_RASPBERRYPI}
+        mode: EXCLUSIVE
+        numExecutors: 2
+        remoteFS: ${JENKINS_AGENT_WORKDIR_RASPBERRYPI}
+        launcher:
+          inbound:
+            webSocket: true
+            workDirSettings:
+              disabled: false
+              internalDir: remoting
   securityRealm:
     local:
       allowsSignup: false
