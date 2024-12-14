@@ -24,10 +24,10 @@ jenkins:
               disabled: false
               internalDir: remoting
     - permanent:
-        name: ${JENKINS_AGENT_NAME_RASPBERRYPI}
+        name: ${JENKINS_AGENT_NAME_DOTNET_ARM64}
         mode: EXCLUSIVE
         numExecutors: 2
-        remoteFS: ${JENKINS_AGENT_WORKDIR_RASPBERRYPI}
+        remoteFS: ${JENKINS_AGENT_WORKDIR_DOTNET_ARM64}
         launcher:
           inbound:
             webSocket: true
