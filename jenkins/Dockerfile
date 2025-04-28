@@ -1,4 +1,4 @@
-FROM jenkins/jenkins:latest
+FROM jenkins/jenkins:latest-jdk21
 
 COPY jenkins/casc.yaml /var/casc.yaml
 
